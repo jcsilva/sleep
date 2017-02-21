@@ -21,7 +21,9 @@ noble.on('discover', function(peripheral) {
     console.log('advertising the following service uuid\'s: ' + peripheral.advertisement.serviceUuids);
     console.log();
 
-    if (foundDevices.indexOf(peripheral.address) < 0 && peripheral.advertisement.name === desiredName /* "SSV1_00000" */ ) {
+    if (peripheral.advertisement.name === desiredName /* "SSV1_00000" */ ) {
+        // we don't need to scan anymore.
+        noble.stopScanning();
 
         foundDevices.push(peripheral.address);
         foundRssi.push(peripheral.rssi);
